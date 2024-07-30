@@ -11,6 +11,7 @@ import {
   Platform,
 } from "react-native";
 import AddPlayerModal from "./components/AddPlayerModal";
+import PlayerList from "./components/PlayerList";
 
 export default function App() {
   const [inputValue, setInputValue] = useState("");
@@ -91,6 +92,10 @@ export default function App() {
                 resizeMode="contain"
               />
             </TouchableOpacity>
+            <View style={styles.teamContainer}>
+              <TextInput style={styles.teamNameText} placeholder="Enter Your Team Name"/>
+              <PlayerList players={players} />
+            </View>
           </>
         )}
         {isModalVisible && (
@@ -189,5 +194,21 @@ const styles = StyleSheet.create({
     top: 20,
     justifyContent: "center",
     alignItems: "center",
+  },
+  teamContainer: {
+    marginTop: 70,
+    marginLeft: -60,
+    marginRight: -30,
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  teamNameText: {
+    fontSize: 25,
+    color: "#000",
+    textAlign: "left",
+    marginTop: 10,
+    fontStyle: "normal",
+    padding: 10,
+    flex: 1,
   },
 });
