@@ -58,7 +58,10 @@ const AddPlayerModal = ({ isVisible, onClose, addPlayer, setPlayerName: setAppPl
           />
           <TouchableOpacity
             style={styles.touchable}
-            onPress={handleSave}
+            onPress={() => {
+              console.log("Save button pressed");
+              handleSave();
+            }}
             disabled={!isSaveEnabled}
           >
             <Image
