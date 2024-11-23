@@ -15,23 +15,30 @@ const PlayerList = ({ players }) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
+    width: "100%",
+    alignItems: "center",
   },
   playerRow: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderBottomWidth: 1,
     borderBottomColor: "#ccc",
+    width: "80%",
+    position: "relative",
   },
   playerName: {
     fontSize: 18,
-    color: "red", // Making the color red to make player info visible for now
+    color: "#000",
+    position: "absolute",
+    left: -30,
   },
   playerLevel: {
     fontSize: 18,
-    color: "red", // Making the color red to make player info visible for now
+    color: "#000",
+    position: "absolute",
+    left: 300,
   },
 });
 
