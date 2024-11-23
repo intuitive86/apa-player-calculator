@@ -94,12 +94,12 @@ export default function App() {
                   resizeMode="contain"
                 />
               </TouchableOpacity>
+              <View style={styles.teamContainer}>
+                <TextInput style={styles.teamNameText} placeholder="Enter Your Team Name"/>
+                <PlayerList players={players} />
+              </View>
             </>
           )}
-          <View style={styles.teamContainer}>
-            <TextInput style={styles.teamNameText} placeholder="Enter Your Team Name"/>
-            <PlayerList players={players} />
-          </View>
           {isModalVisible && (
             <AddPlayerModal
               isVisible={isModalVisible}
@@ -203,14 +203,15 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "flex-start",
     marginBottom: 20,
+    marginTop: 250,
     paddingLeft: 7,
-    position: "absolute",
-    top: 260,
+    // Remove position: "absolute" and top properties
   },
   teamNameText: {
     fontSize: 25,
     color: "#000",
-    textAlign: "center",
+    textAlign: "left", // Align text to the left
     marginBottom: 20,
+    // Remove position: "absolute" and top properties
   },
 });
