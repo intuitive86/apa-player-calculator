@@ -48,74 +48,74 @@ export default function App() {
   return (
     <>
       <RNStatusBar backgroundColor="#F8F4FB" barStyle="dark-content" />
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-    >
-      <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <View style={styles.innerContainer}>
-          <Text style={styles.title}>APA Player Calculator</Text>
-          <TextInput
-            style={styles.textInput}
-            placeholder="00"
-            onChangeText={handleInputChange}
-            keyboardType="numeric"
-            maxLength={2}
-            editable={true}
-            selectTextOnFocus={true}
-            value={inputValue}
-          />
-          <Text style={styles.dynamicValueChanger}> 00</Text>
-          {isPlusButtonVisible && (
-            <TouchableOpacity
-              style={styles.plusButton}
-              onPress={toggleModalVisibility}
-            >
-              <Image
-                source={require("./assets/APA/plus-button.png")}
-                style={styles.buttonImage}
-                resizeMode="contain"
-              />
-            </TouchableOpacity>
-          )}
-          {isFirstPlayerAdded && (
-            <>
-              <View style={styles.addNewPlayerContainer}>
-                <Text style={styles.addNewPlayerText}>Add New Player</Text>
-                <TouchableOpacity style={styles.addNewPlayerButton}>
-                  <Image
-                    source={require("./assets/APA/addNewPlayerPlustButton.png")}
-                    style={styles.addNewPlayerPlusButton}
-                    resizeMode="contain"
-                  />
-                </TouchableOpacity>
-              </View>
-              <TouchableOpacity style={styles.hamburgerContainer}>
+      <KeyboardAvoidingView
+        style={styles.container}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      >
+        <ScrollView contentContainerStyle={styles.scrollContainer}>
+          <View style={styles.innerContainer}>
+            <Text style={styles.title}>APA Player Calculator</Text>
+            <TextInput
+              style={styles.textInput}
+              placeholder="00"
+              onChangeText={handleInputChange}
+              keyboardType="numeric"
+              maxLength={2}
+              editable={true}
+              selectTextOnFocus={true}
+              value={inputValue}
+            />
+            <Text style={styles.dynamicValueChanger}> 00</Text>
+            {isPlusButtonVisible && (
+              <TouchableOpacity
+                style={styles.plusButton}
+                onPress={toggleModalVisibility}
+              >
                 <Image
-                  source={require("./assets/APA/hamburgerMenuIcon.png")}
-                  style={styles.hamburgerStyle}
+                  source={require("./assets/APA/plus-button.png")}
+                  style={styles.buttonImage}
                   resizeMode="contain"
                 />
               </TouchableOpacity>
-              <View style={styles.teamContainer}>
-                <TextInput style={styles.teamNameText} placeholder="Enter Your Team Name"/>
-                <PlayerList players={players} />
-              </View>
-            </>
-          )}
-          {isModalVisible && (
-            <AddPlayerModal
-              isVisible={isModalVisible}
-              onClose={toggleModalVisibility}
-              addPlayer={addPlayer}
-              setPlayerName={setPlayerName}
-              setPlayerLevel={setPlayerLevel}
-            />
-          )}
-          <StatusBar style="auto" />
-        </View>
-      </ScrollView>
-    </KeyboardAvoidingView>
+            )}
+            {isFirstPlayerAdded && (
+              <>
+                <View style={styles.addNewPlayerContainer}>
+                  <Text style={styles.addNewPlayerText}>Add New Player</Text>
+                  <TouchableOpacity style={styles.addNewPlayerButton}>
+                    <Image
+                      source={require("./assets/APA/addNewPlayerPlustButton.png")}
+                      style={styles.addNewPlayerPlusButton}
+                      resizeMode="contain"
+                    />
+                  </TouchableOpacity>
+                </View>
+                <TouchableOpacity style={styles.hamburgerContainer}>
+                  <Image
+                    source={require("./assets/APA/hamburgerMenuIcon.png")}
+                    style={styles.hamburgerStyle}
+                    resizeMode="contain"
+                  />
+                </TouchableOpacity>
+                <View style={styles.teamContainer}>
+                  <TextInput style={styles.teamNameText} placeholder="Enter Your Team Name" />
+                  <PlayerList players={players} />
+                </View>
+              </>
+            )}
+            {isModalVisible && (
+              <AddPlayerModal
+                isVisible={isModalVisible}
+                onClose={toggleModalVisibility}
+                addPlayer={addPlayer}
+                setPlayerName={setPlayerName}
+                setPlayerLevel={setPlayerLevel}
+              />
+            )}
+            <StatusBar style="auto" />
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </>
   );
 }
