@@ -40,7 +40,7 @@ export default function App() {
       name: player.playerName,
       level: player.playerLevel,
     };
-    setPlayers([...players, newPlayer]);
+    setPlayers([newPlayer, ...players]); // Add new player at the top of the list
     setIsPlusButtonVisible(false);
     setIsFirstPlayerAdded(true);
   };
@@ -82,7 +82,10 @@ export default function App() {
               <>
                 <View style={styles.addNewPlayerContainer}>
                   <Text style={styles.addNewPlayerText}>Add New Player</Text>
-                  <TouchableOpacity style={styles.addNewPlayerButton}>
+                  <TouchableOpacity
+                    style={styles.addNewPlayerButton}
+                    onPress={toggleModalVisibility}
+                  >
                     <Image
                       source={require("./assets/APA/addNewPlayerPlustButton.png")}
                       style={styles.addNewPlayerPlusButton}
@@ -165,7 +168,8 @@ const styles = StyleSheet.create({
   plusButton: {
     position: "absolute",
     marginBottom: 20,
-    top: 400,
+    top: 200, // Adjust this value to bring the button into view
+    left: 150, // Adjust this value to position it horizontally
   },
   buttonImage: {
     width: 200,
@@ -207,15 +211,14 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "flex-start",
     marginBottom: 20,
-    marginTop: 250,
     paddingLeft: 7,
-    // Remove position: "absolute" and top properties
+    position: "absolute",
+    top: 260,
   },
   teamNameText: {
     fontSize: 25,
     color: "#000",
     textAlign: "left", // Align text to the left
     marginBottom: 20,
-    // Remove position: "absolute" and top properties
   },
 });

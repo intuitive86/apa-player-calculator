@@ -5,8 +5,10 @@ import PlayerRowStateHandler from "./PlayerRowStateHandler";
 const PlayerList = ({ players }) => {
   return (
     <View style={styles.container}>
-      {players.map((player) => (
-        <PlayerRowStateHandler key={player.id} player={player} />
+      {players.map((player, index) => (
+        <View key={player.id} style={[styles.playerContainer, index !== players.length - 1 && styles.playerContainerSpacing]}>
+          <PlayerRowStateHandler player={player} />
+        </View>
       ))}
     </View>
   );
@@ -16,6 +18,12 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     alignItems: "center",
+  },
+  playerContainer: {
+    width: "100%",
+  },
+  playerContainerSpacing: {
+    marginBottom: 40, // Adjust this value to control the spacing between players
   },
 });
 
