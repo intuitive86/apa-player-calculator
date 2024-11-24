@@ -65,18 +65,20 @@ export default function App() {
               selectTextOnFocus={true}
               value={inputValue}
             />
-            <Text style={styles.dynamicValueChanger}> 00</Text>
+            <Text style={styles.dynamicValueChanger}> 00 </Text>
             {isPlusButtonVisible && (
-              <TouchableOpacity
-                style={styles.plusButton}
-                onPress={toggleModalVisibility}
-              >
-                <Image
-                  source={require("./assets/APA/plus-button.png")}
-                  style={styles.buttonImage}
-                  resizeMode="contain"
-                />
-              </TouchableOpacity>
+              <View style={styles.plusButtonContainer}>
+                <TouchableOpacity
+                  style={styles.plusButton}
+                  onPress={toggleModalVisibility}
+                >
+                  <Image
+                    source={require("./assets/APA/plus-button.png")}
+                    style={styles.buttonImage}
+                    resizeMode="contain"
+                  />
+                </TouchableOpacity>
+              </View>
             )}
             {isFirstPlayerAdded && (
               <>
@@ -165,11 +167,17 @@ const styles = StyleSheet.create({
     left: 150,
     top: 95,
   },
-  plusButton: {
+  plusButtonContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
     position: "absolute",
+    left: "50%",
+    top: "50%",
+    transform: [{ translateX: -80 }, { translateY: 400 }],
+  },
+  plusButton: {
     marginBottom: 20,
-    top: 200, // Adjust this value to bring the button into view
-    left: 150, // Adjust this value to position it horizontally
   },
   buttonImage: {
     width: 200,
