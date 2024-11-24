@@ -7,6 +7,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  StatusBar
 } from "react-native";
 
 const AddPlayerModal = ({ isVisible, onClose, addPlayer, setPlayerName: setAppPlayerName, setPlayerLevel: setAppPlayerLevel }) => {
@@ -27,6 +28,7 @@ const AddPlayerModal = ({ isVisible, onClose, addPlayer, setPlayerName: setAppPl
 
   return (
     <Modal visible={isVisible} transparent={true} animationType="none">
+      <StatusBar backgroundColor="rgba(0, 0, 0, 0.3)" barStyle="light-content" />
       <View style={styles.modalContainer}>
         <View style={styles.imageContainer}>
           <Text style={styles.addPlayerText}>Add Player Name</Text>
