@@ -10,6 +10,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  StatusBar as RNStatusBar,
 } from "react-native";
 import AddPlayerModal from "./components/AddPlayerModal";
 import PlayerList from "./components/PlayerList";
@@ -45,6 +46,8 @@ export default function App() {
   };
 
   return (
+    <>
+      <RNStatusBar backgroundColor="#F8F4FB" barStyle="dark-content" />
     <KeyboardAvoidingView
       style={styles.container}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -113,6 +116,7 @@ export default function App() {
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
+    </>
   );
 }
 
