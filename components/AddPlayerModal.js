@@ -21,6 +21,7 @@ const AddPlayerModal = ({ isVisible, onClose, addPlayer, setPlayerName: setAppPl
   }, [playerName, playerLevel]);
 
   const handleSave = () => {
+    console.log("Save button pressed");
     console.log(`Player Name: ${playerName}, Player Level: ${playerLevel}`);
     addPlayer({ playerName, playerLevel });
     onClose();

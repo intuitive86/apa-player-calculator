@@ -3,17 +3,16 @@ import { Text, StyleSheet, Image, TouchableOpacity, View, Platform } from "react
 import defaultPlayerButtonImage from "../assets/APA/PlayerNameBG/defaultPlayerButtonImage.png";
 import playerHighlightStateGreen from "../assets/APA/PlayerNameBG/playerHighlightStateGreen.png";
 
-const PlayerRowStateHandler = ({ player }) => {
-  const [isHighlighted, setIsHighlighted] = useState(false);
-
+const PlayerRowStateHandler = ({ player, togglePlayerLevel }) => {
   const handlePress = () => {
-    setIsHighlighted(!isHighlighted);
+    console.log(`Player ${player.name} with level ${player.level} tapped...`);
+    togglePlayerLevel(player.id);
   };
 
   return (
     <TouchableOpacity style={styles.playerRow} onPress={handlePress}>
       <Image
-        source={isHighlighted ? playerHighlightStateGreen : defaultPlayerButtonImage}
+        source={player.isHighlighted ? playerHighlightStateGreen : defaultPlayerButtonImage}
         style={styles.playerBackground}
         resizeMode="contain"
       />

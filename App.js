@@ -23,10 +23,17 @@ export default function App() {
   const [isFirstPlayerAdded, setIsFirstPlayerAdded] = useState(false);
   const [playerName, setPlayerName] = useState("");
   const [playerLevel, setPlayerLevel] = useState("");
+  const [maxTeamObjective, setMaxTeamObjective] = useState(0);
+  const [currentObjective, setCurrentObjective] = useState(0);
+  const [isObjectiveExceeded, setIsObjectiveExceeded] = useState(false);
 
   const handleInputChange = (text) => {
+    console.log(`User set max team objective to: ${text}`);
     if (/^\d{0,2}$/.test(text)) {
       setInputValue(text);
+      setMaxTeamObjective(parseInt(text, 10) || 0);
+      setCurrentObjective(0);
+      setIsObjectiveExceeded(false);
     }
   };
 
@@ -38,11 +45,29 @@ export default function App() {
     const newPlayer = {
       id: players.length + 1,
       name: player.playerName,
-      level: player.playerLevel,
+      level: parseInt(player.playerLevel, 10),
+      isHighlighted: false,
     };
     setPlayers([newPlayer, ...players]); // Add new player at the top of the list
     setIsPlusButtonVisible(false);
     setIsFirstPlayerAdded(true);
+  };
+
+  const togglePlayerLevel = (playerId) => {
+    setPlayers((prevPlayers) =>
+      prevPlayers.map((player) => {
+        if (player.id === playerId) {
+          const newIsHighlighted = !player.isHighlighted;
+          const levelChange = newIsHighlighted ? player.level : -player.level;
+          const newObjective = currentObjective + levelChange;
+          console.log(`Previous Objective: ${currentObjective}, Player Level: ${player.level}, New Objective: ${newObjective}`);
+          setCurrentObjective(newObjective);
+          setIsObjectiveExceeded(newObjective > maxTeamObjective);
+          return { ...player, isHighlighted: newIsHighlighted };
+        }
+        return player;
+      })
+    );
   };
 
   return (
@@ -64,19 +89,25 @@ export default function App() {
               editable={true}
               selectTextOnFocus={true}
               value={inputValue}
+              accessibilityLabel="SetMaxTeamObjective"
+              testID="SetMaxTeamObjective"
             />
-            <Text style={styles.dynamicValueChanger}> 00</Text>
+            <Text style={[styles.dynamicValueChanger, isObjectiveExceeded && styles.dynamicValueExceeded]}>
+              {String(currentObjective).padStart(2, '0')}
+            </Text>
             {isPlusButtonVisible && (
-              <TouchableOpacity
-                style={styles.plusButton}
-                onPress={toggleModalVisibility}
-              >
-                <Image
-                  source={require("./assets/APA/plus-button.png")}
-                  style={styles.buttonImage}
-                  resizeMode="contain"
-                />
-              </TouchableOpacity>
+              <View style={styles.plusButtonContainer}>
+                <TouchableOpacity
+                  style={styles.plusButton}
+                  onPress={toggleModalVisibility}
+                >
+                  <Image
+                    source={require("./assets/APA/plus-button.png")}
+                    style={styles.buttonImage}
+                    resizeMode="contain"
+                  />
+                </TouchableOpacity>
+              </View>
             )}
             {isFirstPlayerAdded && (
               <>
@@ -102,7 +133,7 @@ export default function App() {
                 </TouchableOpacity>
                 <View style={styles.teamContainer}>
                   <TextInput style={styles.teamNameText} placeholder="Enter Your Team Name" />
-                  <PlayerList players={players} />
+                  <PlayerList players={players} togglePlayerLevel={togglePlayerLevel} />
                 </View>
               </>
             )}
@@ -162,14 +193,22 @@ const styles = StyleSheet.create({
     fontSize: 50,
     marginBottom: 70,
     position: "absolute",
-    left: 150,
     top: 95,
   },
-  plusButton: {
+  dynamicValueExceeded: {
+    color: "red",
+  },
+  plusButtonContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
     position: "absolute",
+    left: "50%",
+    top: "50%",
+    transform: [{ translateX: -80 }, { translateY: 400 }],
+  },
+  plusButton: {
     marginBottom: 20,
-    top: 200, // Adjust this value to bring the button into view
-    left: 150, // Adjust this value to position it horizontally
   },
   buttonImage: {
     width: 200,
