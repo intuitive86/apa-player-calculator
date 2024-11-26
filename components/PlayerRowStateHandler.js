@@ -2,17 +2,26 @@ import React, { useState } from "react";
 import { Text, StyleSheet, Image, TouchableOpacity, View, Platform } from "react-native";
 import defaultPlayerButtonImage from "../assets/APA/PlayerNameBG/defaultPlayerButtonImage.png";
 import playerHighlightStateGreen from "../assets/APA/PlayerNameBG/playerHighlightStateGreen.png";
+import maxValueExceededState from "../assets/APA/PlayerNameBG/maxValueExceededState.png";
 
-const PlayerRowStateHandler = ({ player, togglePlayerLevel }) => {
+const PlayerRowStateHandler = ({ player, togglePlayerLevel, isObjectiveExceeded, lastSelectedPlayerId }) => {
   const handlePress = () => {
     console.log(`Player ${player.name} with level ${player.level} tapped...`);
-    togglePlayerLevel(player.id);
+    togglePlayerLevel(player.id, player.level);
   };
+
+  const getPlayerBackground = () => {
+    if (isObjectiveExceeded && player.id === lastSelectedPlayerId) {
+      console.log(`Player ${player.name} with level ${player.level} exceeded the max team value.`);
+      return maxValueExceededState;
+    }
+    return player.isHighlighted ? playerHighlightStateGreen : defaultPlayerButtonImage;
+  }
 
   return (
     <TouchableOpacity style={styles.playerRow} onPress={handlePress}>
       <Image
-        source={player.isHighlighted ? playerHighlightStateGreen : defaultPlayerButtonImage}
+        source={getPlayerBackground()}
         style={styles.playerBackground}
         resizeMode="contain"
       />

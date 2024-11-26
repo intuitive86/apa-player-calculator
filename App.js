@@ -26,6 +26,7 @@ export default function App() {
   const [maxTeamObjective, setMaxTeamObjective] = useState(0);
   const [currentObjective, setCurrentObjective] = useState(0);
   const [isObjectiveExceeded, setIsObjectiveExceeded] = useState(false);
+  const [lastSelectedPlayerId, setLastSelectedPlayerId] = useState(null);
 
   const handleInputChange = (text) => {
     console.log(`User set max team objective to: ${text}`);
@@ -34,6 +35,7 @@ export default function App() {
       setMaxTeamObjective(parseInt(text, 10) || 0);
       setCurrentObjective(0);
       setIsObjectiveExceeded(false);
+      setLastSelectedPlayerId(null);
     }
   };
 
@@ -63,6 +65,8 @@ export default function App() {
           console.log(`Previous Objective: ${currentObjective}, Player Level: ${player.level}, New Objective: ${newObjective}`);
           setCurrentObjective(newObjective);
           setIsObjectiveExceeded(newObjective > maxTeamObjective);
+          setLastSelectedPlayerId(newIsHighlighted ? playerId : null);
+          console.log(`Player ${player.name} is now ${newIsHighlighted ? "highlighted" : "not highlighted"}. Last selected player ID: ${lastSelectedPlayerId}`);
           return { ...player, isHighlighted: newIsHighlighted };
         }
         return player;
@@ -133,7 +137,7 @@ export default function App() {
                 </TouchableOpacity>
                 <View style={styles.teamContainer}>
                   <TextInput style={styles.teamNameText} placeholder="Enter Your Team Name" />
-                  <PlayerList players={players} togglePlayerLevel={togglePlayerLevel} />
+                  <PlayerList players={players} togglePlayerLevel={togglePlayerLevel} isObjectiveExceeded={isObjectiveExceeded} lastSelectedPlayerId={lastSelectedPlayerId} />
                 </View>
               </>
             )}
