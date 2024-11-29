@@ -1,9 +1,11 @@
 {
   "expo": {
-    "name": "apaplayercalculator",
+    "name": "APA Player Calculator",
     "slug": "apaplayercalculator",
     "version": "1.0.0",
     "sdkVersion": "52.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
     "platforms": [
       "ios",
       "android"
@@ -12,14 +14,27 @@
     "ios": {
       "supportsTablet": true
     },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "android": {
       "adaptiveIcon": {
+        "versionCode": 1,
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.msierra.apaplayercalculator"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "7acd98a3-d15c-4890-8acf-b3bd5c7b4663"
+      }
     }
   }
 }
